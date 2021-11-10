@@ -14,7 +14,7 @@ def hr_role_required(func):
         # check if the user has the hr role
         if current_user.roles_id == 3 or current_user.roles_id == '3':
             return func(*args, **kwargs)
-        return redirect(url_for('views.home'))
+        return redirect(url_for('views.home'), code=307)
     return wrapper
 
 
@@ -25,7 +25,7 @@ def chef_role_required(func):
         # check if the user has the chef role
         if current_user.roles_id == 2 or current_user. roles_id == '2':
             return func(*args, **kwargs)
-        return redirect(url_for('views.home'))
+        return redirect(url_for('views.home'), code=307)
     return wrapper
 
 
@@ -38,7 +38,7 @@ def chef_or_hr_role_required(func):
             return func(*args, **kwargs)
         if current_user.roles_id == 2 or current_user. roles_id == '2':
             return func(*args, **kwargs)
-        return redirect(url_for('views.home'))
+        return redirect(url_for('views.home'), code=307)
     return wrapper
 
 

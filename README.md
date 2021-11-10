@@ -1,5 +1,7 @@
 ### Time Tracking Tool for university project
 
+### Usage
+
 ## to install all requirements run:
 
 ```
@@ -57,3 +59,7 @@ python3 manage.py runserver
 ```
 
 again.
+
+### Testing
+
+## 

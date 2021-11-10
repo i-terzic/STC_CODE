@@ -1,5 +1,6 @@
 # Standard libary imports
 from datetime import datetime
+from types import CodeType
 
 # Third pary imports
 from flask import render_template, session, redirect, url_for, request, Blueprint, flash

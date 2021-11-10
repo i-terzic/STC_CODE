@@ -22,6 +22,7 @@ views = Blueprint('views', __name__)
 @login_required
 def home() -> 'html':
     """viewfunction for home view"""
+
     if request.method == 'POST':
         # check if the http request was a post request
 
@@ -49,7 +50,6 @@ def home() -> 'html':
 
     # code executed if the http request is not a POST request
     # return the rendered template which the user can see
-
     user = User.query.filter_by(id=session.get('user_id')).first()
     today = date.today()
     first_date = date.today().replace(day=1)

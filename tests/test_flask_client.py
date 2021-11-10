@@ -51,6 +51,3 @@ class FlaskTestCase(flask_unittest.ClientTestCase):
         self.assertLocationHeader(
             rv=response,
             expected_location='http://localhost/login?next=%2Fhome')
-
-    # def test_access_restriction(self, client) -> None:
-    #     pass
