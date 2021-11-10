@@ -23,6 +23,12 @@ once to create a database.
 ```
 python3 manage.py shell
 
+```
+
+to add some Roles and Users run:
+
+```
+
 from app import db
 from app.models import User, Role
 
@@ -43,3 +49,11 @@ db.session.commit()
 ```
 quit()
 ```
+
+4. to run the application run:
+
+```
+python3 manage.py runserver
+```
+
+again.
