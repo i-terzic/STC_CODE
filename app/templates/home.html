@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock title %}
+
+{% block page_header %}
+<h3>Hallo, {{full_name}}</h3>
+<br>
+
+{% endblock page_header %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="content-box">
+                <h4>Work-Statistics</h4>
+                <p>
+                    Target Hours: <span class="data-visualisation"><strong>
+                            {{user_data.target_hours}}</strong></span><br>
+                    Worked Hours: <span
+                        class="data-visualisation"><strong>{{user_data.worked_hours}}</strong></span><br>
+                    Flex Time: <span class="data-visualisation"><strong>{{user_data.flex_time}}</strong></span> Days<br>
+                    Time Balance: <span
+                        class="data-visualisation"><strong>{{user_data.worked_hours-hours_till_today}}</strong></span>
+                    <br>
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content-box">
+                <div class="content-section">
+                    <h4>Vacation-Statistics</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item list-group-item-light inner-container"
+                            style="border-radius: 1em; margin:5px 1em">
+                            Vacation days taken: <strong><span
+                                    class="data-visualisation">{{user_data.vacation_days_taken}}</span> </strong> <br>
+                            Vacation days available: <strong>
+                                <span
+                                    class="data-visualisation">{{user_data.vacation_days - user_data.vacation_days_taken}}</span></strong>
+                    </ul>
+                </div>
+                <br>
+                <div class="content-section">
+                    <h4>Booked-Vacation</h4>
+                    <ul class="list-group">
+                        {% for request in requests %}
+                        {% if request.approved == True %}
+                        <li class="list-group-item list-group-item-light inner-container"
+                            style="border-radius: 1em; margin:5px 1em">
+                            Start date: <strong><span class="data-visualisation">{{request.start_date}}</span></strong>
+                            <br>
+                            End date: <strong><span class="data-visualisation">{{request.end_date}}</span></strong>
+                            <br>
+                        </li>
+                        {% endif %}
+
+                        {% endfor %}
+                    </ul>
+
+                </div>
+                <br>
+
+
+
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="content-box">
+
+                <div class="content-section">
+                    <h4>Notifications</h4>
+
+
+
+                    {% if notifications %}
+                    <label for="notifications">Notifications</label>
+                    {% endif %}
+                    <ul class="list-group" id="notifications">
+                        {% for noti in notifications %}
+                        <li class="list-group-item list-group-item-light inner-container"
+                            style="border-radius: 1em; margin:5px 1em">
+                            <form method="POST">
+                                <button type="submit" class="close" name="close-notification"
+                                    value="{{noti.id}}"><span>&times;</span></button>
+                            </form>
+                            {{noti.message}}
+                        </li>
+                        {% endfor %}
+                        <br>
+                    </ul>
+
+
+
+
+
+
+
+
+
+                    {% if requests %}
+                    <label for="accepted-requests">Accepted Requests</label>
+                    {% endif %}
+                    <ul class="list-group" id="accepted-requests">
+                        {% for request in requests %}
+                        {% if request.notify == True %}
+                        <li class="list-group-item list-group-item-light inner-container"
+                            style="border-radius: 1em; margin:5px 1em">
+                            <form method="POST">
+                                <button type="submit" class="close" name="close-vacation"
+                                    value="{{request.id}}"><span>&times;</span></button>
+                            </form>
+                            Start date: <strong><span class="data-visualisation">{{request.start_date}}</span></strong>
+                            <br>
+                            End date: <strong><span class="data-visualisation">{{request.end_date}}</span></strong>
+                            <br>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                    <br>
+                    {% if cases %}
+                    <label for="approved-illness">Approved Illness</label>
+                    {% endif %}
+                    <ul class="list-group" id="accepted-requests">
+                        {% for case in cases %}
+                        {% if case.approved == True and case.notify == True %}
+                        <li class="list-group-item list-group-item-light inner-container"
+                            style="border-radius: 1em; margin:5px 1em">
+                            <form method="POST">
+                                <button type="submit" class="close" name="close-case"
+                                    value="{{case.id}}"><span>&times;</span></button>
+                            </form>
+                            Start date: <strong><span class="data-visualisation">{{case.start_date}}</span></strong>
+                            <br>
+                            End date: <strong><span class="data-visualisation">{{case.end_date}}</span></strong>
+                            <br>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock content %}

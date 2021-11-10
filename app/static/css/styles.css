@@ -1,0 +1,57 @@
+body,
+html {
+  height: 100%;
+  background-color: #fcfcfc;
+  font-family: "Microsoft YaHei UI", sans-serif, monospace;
+}
+
+.logo {
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 300px;
+  align-items: center;
+  position: relative;
+  display: block;
+}
+
+.button-small {
+  background: #007bff;
+  color: white;
+  float: left;
+  border-radius: 57px;
+  border: 0px;
+  height: 40px;
+  transition: all 0.4s ease 0s;
+}
+
+.button-small:hover {
+  background: #3661ff;
+}
+
+.content-box {
+  background-color: #e4e4e4;
+  padding: 1em;
+  border-radius: 1em;
+  box-shadow: 1em 1em 30px #d3d3d3;
+  position: relative;
+  margin: 1em;
+}
+
+.inner-container {
+  background-color: #e4e4e4;
+  padding: 1em;
+  border-radius: 2em;
+  border: 1px #7e7e7e solid;
+  box-shadow: 1em 1em 30px #d3d3d3;
+  color: rgb(87, 87, 87);
+}
+
+.data-visualisation {
+  color: #00a6ff;
+  text-emphasis: filled #00a6ff;
+}
+
+.content-box .table-limited {
+  overflow: hidden;
+}

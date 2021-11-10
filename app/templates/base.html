@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}STC{% endblock title %}</title>
+    <meta name="viewport" content="with=device-with, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+</head>
+
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbar">
+            <ul class="navbar-nav mr-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" id="home" href="/home">Home</a></li>
+                <li class="nav-item"><a class="nav-item nav-link" id="wortime" href="/worktime">Worktime</a></li>
+                {% if roles_id == 2 %}
+                <li class="nav-item"><a class="nav-item nav-link" id="approve-worktime" href="/approve_worktime">Approve
+                        Worktime</a>
+                </li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-item nav-link" id="vacation" href="/vacation">Vacation</a></li>
+                {% if roles_id == 2 or roles_id == 3 %}
+                <li class="nav-item"><a class="nav-item nav-link" id="vacation-requests"
+                        href="{{url_for('vac.vacation_requests')}}">Vacation Request</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-item nav-link" id="illness" href="/illness">Illness</a></li>
+
+                {% if roles_id == 3 %}
+                <li class="nav-iteml"><a href="{{url_for('ill.illness_cases')}}" class="nav-item nav-link">Illness
+                        Cases</a></li>
+                {% endif %}
+                {% else %}
+                <li class="nav-item"><a class="nav-item nav-link" id="login" href="{{url_for('auth.login')}}">Login</a>
+                </li>
+                {% endif %}
+
+            </ul>
+            {% if user.is_authenticated %}
+            <span class="navbar-text">
+                <button class="button-small">
+                    <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+                </button>
+            </span>
+            {% endif %}
+
+
+        </div>
+    </nav>
+    <!--Navbar-->
+
+
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        <!-- Categories: success (green), info (blue), warning (yellow), danger (red) -->
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            <!-- <strong>Title</strong> --> {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+    </div>
+    <!--Flashing messages-->
+
+    <br>
+
+
+    <div class="page-header">
+        <div class="container">
+            {% block page_header %}
+
+            {% endblock page_header %}
+        </div>
+    </div>
+
+    {% block content %}
+
+    {% endblock content %}
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
+
+    <script src="{{url_for('static', filename='js/script.js')}}"></script>
+</body>
+
+</html>
