@@ -62,4 +62,10 @@ again.
 
 ### Testing
 
-## 
+1. Run the tests by typing
+
+```
+pytest
+```
+
+in your terminal.
